@@ -16,6 +16,13 @@
          },
          "defaultValue": ""
       },
+      "adminVMName": {
+         "type": "string",
+         "defaultValue": "adminVM",
+         "metadata": {
+            "description": "Admin Server hosting VM name."
+         }
+      },
       "aadsSettings": {
          "type": "object",
          "defaultValue": {
