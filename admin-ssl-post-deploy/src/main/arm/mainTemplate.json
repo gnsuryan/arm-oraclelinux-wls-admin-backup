@@ -112,10 +112,10 @@
          "properties": {
             "publisher": "Microsoft.Azure.Extensions",
             "type": "CustomScript",
-            "timestamp": "[int(parameters('deploy_timestamp'))]",
             "typeHandlerVersion": "2.1",
             "autoUpgradeMinorVersion": true,
             "settings": {
+               "timestamp": "[int(parameters('deploy_timestamp'))]",
                "fileUris": [
                   "[uri(parameters('_artifactsLocation'), concat('scripts/', variables('name_scriptFile'), parameters('_artifactsLocationSasToken')))]"
                ]
