@@ -302,6 +302,8 @@ export oracleHome=$5
 export wlsDomainPath=$6
 
 export enableAAD="${7}"
+enableAAD="${enableAAD,,}"
+
 export wlsADSSLCer="${8}"
 
 export isCustomSSLEnabled="${9}"
@@ -335,7 +337,6 @@ parseAndSaveCustomSSLKeyStoreData
 
 if [ "$enableAAD" == "true" ];then
     parseLDAPCertificate
-    importAADCertificate
     importAADCertificateIntoWLSCustomTrustKeyStore
 fi
 
