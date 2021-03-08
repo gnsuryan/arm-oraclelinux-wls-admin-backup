@@ -279,7 +279,7 @@ for (( i=0;i<$ELEMENTS;i++)); do
     echo "ARG[${args[${i}]}]"
 done
 
-if [ $# -lt 23 ]
+if [ $# -lt 9 ]
 then
     usage
     exit 1
