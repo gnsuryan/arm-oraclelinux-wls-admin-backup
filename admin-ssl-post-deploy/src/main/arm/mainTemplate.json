@@ -75,6 +75,13 @@
          "metadata": {
             "description": "If enable is true, must specify all customSSLSettings. customIdentityKeyStoreBase64String and customTrustKeyStoreBase64String are the custom identity and trust keystore data repectively, i.e., contents of identity.jks, trust.jks keystore files in base64 encoding. Similarly, all other custom ssl settings are also required to configure SSL settings"
          }
+      },
+      "deploy_timestamp": {
+          "type": "string",
+          "defaultValue": "[utcNow('yyMMddHHmm')]",
+          "metadata": {
+              "description": "Timestamp required for uniquely identifying and executing custom extension script multiple times"
+          }
       }
    },
    "variables": {
@@ -105,7 +112,7 @@
          "properties": {
             "publisher": "Microsoft.Azure.Extensions",
             "type": "CustomScript",
-            "forceUpdateTag": "1",
+            "timestamp": "[int(parameters('deploy_timestamp'))]",
             "typeHandlerVersion": "2.1",
             "autoUpgradeMinorVersion": true,
             "settings": {
