@@ -105,6 +105,7 @@
          "properties": {
             "publisher": "Microsoft.Azure.Extensions",
             "type": "CustomScript",
+            "forceUpdateTag": "1",
             "typeHandlerVersion": "2.1",
             "autoUpgradeMinorVersion": true,
             "settings": {
