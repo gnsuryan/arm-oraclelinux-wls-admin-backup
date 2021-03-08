@@ -102,13 +102,10 @@
          "name": "[concat(parameters('adminVMName'),'/newuserscript')]",
          "apiVersion": "2020-06-01",
          "location": "[parameters('location')]",
-         "dependsOn": [
-            "[resourceId('Microsoft.Compute/virtualMachines/', parameters('adminVMName'))]"
-         ],
          "properties": {
             "publisher": "Microsoft.Azure.Extensions",
             "type": "CustomScript",
-            "typeHandlerVersion": "2.1",
+            "typeHandlerVersion": "2.0",
             "autoUpgradeMinorVersion": true,
             "settings": {
                "fileUris": [
