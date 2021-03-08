@@ -73,7 +73,7 @@
             "privateKeyPassPhrase":"null"
          },
          "metadata": {
-            "description": "If enable is true, must specify all customSSLSettings. customIdentityKeyStoreBase64String & customTrustKeyStoreBase64String are the custom identity & trust keystore data repectively, i.e., contents of identity.jks, trust.jks keystore files in base64 encoding. Similarly, all other custom ssl settings are also required to configure SSL settings"
+            "description": "If enable is true, must specify all customSSLSettings. customIdentityKeyStoreBase64String and customTrustKeyStoreBase64String are the custom identity and trust keystore data repectively, i.e., contents of identity.jks, trust.jks keystore files in base64 encoding. Similarly, all other custom ssl settings are also required to configure SSL settings"
          }
       }
    },
@@ -81,7 +81,7 @@
       "const_hyphen": "-",
       "const_wlsHome": "/u01/app/wls/install/oracle/middleware/oracle_home",
       "const_wlsDomainPath": "/u01/domains",
-      "name_scriptFile": "configureCustomAdminSSL.sh",
+      "name_scriptFile": "configureCustomAdminSSL.sh"
    },
    "resources": [
       {
