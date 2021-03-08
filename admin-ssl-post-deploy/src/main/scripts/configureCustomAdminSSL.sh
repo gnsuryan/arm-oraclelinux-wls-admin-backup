@@ -76,7 +76,7 @@ function validateInput()
         echo_stderr "elasticUserName is required. "
     fi
 
-    if [ ! -z "$isCustomSSLEnabled" == "true" ];
+    if [ "$isCustomSSLEnabled" == "true" ];
     then
         if [[ -z "$customIdentityKeyStoreBase64String" || -z "$customIdentityKeyStorePassPhrase"  || -z "$customIdentityKeyStoreType" ||
               -z "$customTrustKeyStoreBase64String" || -z "$customTrustKeyStorePassPhrase"  || -z "$customTrustKeyStoreType" ||
@@ -85,6 +85,9 @@ function validateInput()
             echo_stderr "customIdentityKeyStoreBase64String, customIdentityKeyStorePassPhrase, customIdentityKeyStoreType, customTrustKeyStoreBase64String, customTrustKeyStorePassPhrase, customTrustKeyStoreType, privateKeyAlias and privateKeyPassPhrase are required. "
             exit 1
         fi
+    else
+        echo "SSL configuration not enabled as iscustomSSLEnabled was set to false. Please set the flag to true and retry."
+        exit 1
     fi
 }
 
@@ -104,6 +107,9 @@ function configureSSL()
 {
     echo "Configuring SSL on Admin Server: $wlsServerName"
     cat <<EOF >$wlsDomainPath/configureSSL.py
+
+isCustomSSLEnabled='${isCustomSSLEnabled}'
+
 connect('$wlsUserName','$wlsPassword','t3://$wlsAdminURL')
 edit("$wlsServerName")
 startEdit()
@@ -322,24 +328,17 @@ export KEYSTORE_PATH="$wlsDomainPath/$wlsDomainName/keystores"
 validateInput
 cleanup
 
-if [ "$isCustomSSLEnabled" == "true" ];
-then
-    parseAndSaveCustomSSLKeyStoreData
+parseAndSaveCustomSSLKeyStoreData
 
-    if [ "$enableAAD" == "true" ];then
-        parseLDAPCertificate
-        importAADCertificate
-        importAADCertificateIntoWLSCustomTrustKeyStore
-    fi
-    
-    wait_for_admin
-    configureSSL
-    restartAdminServerService
-    wait_for_admin
-
-else
-    echo "SSL configuration not enabled as iscustomSSLEnabled was set to false. Please set the flag to true and retry."
-    exit 1
+if [ "$enableAAD" == "true" ];then
+    parseLDAPCertificate
+    importAADCertificate
+    importAADCertificateIntoWLSCustomTrustKeyStore
 fi
+
+wait_for_admin
+configureSSL
+restartAdminServerService
+wait_for_admin
 
 cleanup
