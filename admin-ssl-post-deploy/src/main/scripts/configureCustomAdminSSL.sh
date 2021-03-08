@@ -212,7 +212,7 @@ function importAADCertificateIntoWLSCustomTrustKeyStore()
 
         echo "Importing AAD Certificate into WLS Custom Trust Key Store: "
 
-        sudo ${JAVA_HOME}/bin/keytool -noprompt -import -trustcacerts -keystore {KEYSTORE_PATH}/trust.keystore -storepass ${customTrustKeyStorePassPhrase} -alias aadtrust -file ${addsCertificate} -storetype ${customTrustKeyStoreType}
+        sudo ${JAVA_HOME}/bin/keytool -noprompt -import -trustcacerts -keystore $customSSLTrustKeyStoreFile -storepass $customTrustKeyStorePassPhrase -alias aadtrust -file ${addsCertificate} -storetype $customTrustKeyStoreType
     else
         echo "customSSL not enabled. Not required to configure AAD for WebLogic Custom SSL"
     fi
